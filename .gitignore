@@ -1,0 +1,3 @@
+.env
+server/public
+node_modules
