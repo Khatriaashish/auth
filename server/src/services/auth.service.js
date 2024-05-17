@@ -15,9 +15,27 @@ class AuthService {
   getUserByFilter = async (filter) => {
     try {
       const response = await UserModel.findOne(filter);
+
       return response;
     } catch (error) {
       console.log("getUserByFilter: ", error);
+      throw error;
+    }
+  };
+
+  getUsers = async (
+    filter,
+    paging = { skip: 0, limit: 15 },
+    sort = { role: "asc" }
+  ) => {
+    try {
+      const response = await UserModel.find(filter)
+        .sort(sort)
+        .skip(paging.skip)
+        .limit(paging.limit);
+      return response;
+    } catch (except) {
+      console.log("getUsers: ", except);
       throw error;
     }
   };
@@ -28,6 +46,16 @@ class AuthService {
       return response;
     } catch (error) {
       console.log("updateUser: ", error);
+      throw error;
+    }
+  };
+
+  deleteUser = async (id) => {
+    try {
+      const response = await UserModel.findByIdAndDelete(id);
+      return response;
+    } catch (error) {
+      console.log("Delete user: ", error);
       throw error;
     }
   };
@@ -45,6 +73,21 @@ class AuthService {
     try {
       let PATData = await PATModel.findOne({ token: token });
       return PATData;
+    } catch (excpt) {
+      throw excpt;
+    }
+  };
+
+  deletePAT = async (token) => {
+    try {
+      let deleted = await PATModel.findOneAndDelete({
+        token: token,
+      });
+      if (deleted) {
+        return deleted;
+      } else {
+        throw { code: 404, message: "Token does not exists" };
+      }
     } catch (excpt) {
       throw excpt;
     }

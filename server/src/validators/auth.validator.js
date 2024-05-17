@@ -25,4 +25,19 @@ const loginSchema = z.object({
   password: z.string().min(8),
 });
 
-module.exports = { signUpSchema, setPasswordSchema, loginSchema };
+const emailValidationSchema = z.object({
+  email: z.string().email().min(1),
+});
+
+const updateUserSchema = z.object({
+  fullName: z.string().min(2).max(50),
+  email: z.string().email(),
+});
+
+module.exports = {
+  signUpSchema,
+  setPasswordSchema,
+  loginSchema,
+  emailValidationSchema,
+  updateUserSchema,
+};
