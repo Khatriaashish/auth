@@ -1,3 +1,5 @@
+const UserModel = require("../model/user.model");
+
 class AuthService {
   storeSignUpPayload = async (payload) => {
     try {

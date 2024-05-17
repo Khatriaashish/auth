@@ -3,7 +3,7 @@ require("dotenv").config();
 
 mongoose
   .connect(process.env.MONGODB_URI, {
-    dbName: process.env.MONGODEB_NAME,
+    dbName: process.env.MONGODB_NAME,
     autoCreate: true,
     autoIndex: true,
   })

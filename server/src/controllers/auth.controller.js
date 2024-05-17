@@ -6,6 +6,7 @@ class AuthController {
     try {
       const payload = req.body;
       payload.token = generateRandomString();
+      payload.image = req.file.filename;
 
       const response = await authSvc.storeSignUpPayload(payload);
 
