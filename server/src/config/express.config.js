@@ -19,8 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 //static serving for localhost
-app.use("/asset", express.static("public/uploads"));
-
+app.use("/asset", express.static(path.join(__dirname, "public/uploads")));
 //health-check
 app.get("/health", (req, res) => {
   res.end("App is running well");
