@@ -40,7 +40,7 @@ router.post("/login", validateRequest(loginSchema), authCtrl.login);
 //user CRUD
 router
   .route("/profile")
-  .post(CheckLogin, authCtrl.getLoggedInUser)
+  .get(CheckLogin, authCtrl.getLoggedInUser)
   .put(
     CheckLogin,
     dirSetup,

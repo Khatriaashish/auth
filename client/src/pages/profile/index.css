@@ -39,7 +39,7 @@
 
 .profile-card .btn-primary,
 .profile-card .btn-danger {
-  width: 100%;
+  width: 100% !important;
   margin-top: 10px;
 }
 

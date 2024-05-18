@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
 import HomeHeading from "./components/common/HomeHeading.jsx";
@@ -10,33 +10,110 @@ import UserProfile from "./pages/profile/index.jsx";
 import EditProfile from "./pages/profile/ProfileEdit.jsx";
 import PageNotFound from "./pages/common/PageNotFound.jsx";
 import Logout from "./pages/auth/logout/index.jsx";
+import ResetPassword from "./pages/auth/password/ResetPassword.jsx";
+import { useAuth } from "./context/AuthContext.jsx";
 
 function App() {
+  const ProtectedRoute = ({ children, role }) => {
+    const { authUser } = useAuth();
+    if (!authUser) {
+      return <Navigate to="/login" />;
+    }
+
+    if (role && authUser.role !== role) {
+      return <Navigate to="/" />;
+    }
+    return children;
+  };
+
+  const PublicRoute = ({ children }) => {
+    const { authUser } = useAuth();
+    return !authUser ? children : <Navigate to="/" />;
+  };
   return (
     <>
       <HomeHeading />
       <Toaster />
       <Routes>
         {/*Home Page*/}
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <h1>Home</h1>
+            </ProtectedRoute>
+          }
+        />
 
         {/* Registration */}
-        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          }
+        />
         <Route path="/activate/:token" element={<SetPassword />} />
 
         {/* Reset Password */}
-        <Route path="/forgot-password" element={<ForgetPassword />} />
-        <Route path="/reset/:token" element={<SetPassword />} />
+        <Route
+          path="/forgot-password"
+          element={
+            <PublicRoute>
+              <ForgetPassword />
+            </PublicRoute>
+          }
+        />
+        <Route path="/reset/:resetToken" element={<ResetPassword />} />
 
         {/* login */}
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
 
         {/* Profile */}
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/edit-profile" element={<EditProfile />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <ProtectedRoute>
+              <EditProfile />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* role based authorization - admin */}
+        <Route
+          path="/list-user"
+          element={
+            <ProtectedRoute role="admin">
+              <h1>User List</h1>
+            </ProtectedRoute>
+          }
+        />
 
         {/*Logout*/}
-        <Route path="/logout" element={<Logout />} />
+        <Route
+          path="/logout"
+          element={
+            <ProtectedRoute>
+              <Logout />
+            </ProtectedRoute>
+          }
+        />
 
         {/*Page not found */}
         <Route path="*" element={<PageNotFound />} />

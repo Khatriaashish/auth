@@ -4,8 +4,24 @@ import { NavLink } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import "./index.css";
 import image from "../../assets/images/background.jpg";
+import { useAuth } from "../../context/AuthContext";
+import { extractDate } from "../../utils/extractDate";
+import swal from "sweetalert2";
+import toast from "react-hot-toast";
+import { apiCall } from "../apicall";
 
 const UserProfile = () => {
+  const { authUser, setAuthUser } = useAuth();
+
+  const handleDelete = async () => {
+    try {
+      let response = await apiCall.deleteAccount();
+      setAuthUser(null);
+      toast.success("Deleted! Its sad to see you go");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <div>
       <div className="profile-container">
@@ -14,13 +30,39 @@ const UserProfile = () => {
             <NavLink to="/edit-profile">
               <FaEdit className="edit-icon" size={20} />
             </NavLink>
-            <img src={image} alt="Profile" />
-            <h2>John Doe</h2>
-            <p>john.doe@example.com</p>
-            <p>Admin</p>
-            <p>Member Since January 2020</p>
-            <Badge bg="success">Active</Badge>
-            <Button variant="danger">Delete Account</Button>
+            <img
+              src={import.meta.env.VITE_IMAGE_URL + "/users/" + authUser.image}
+              alt="Profile"
+            />
+            <h2>{authUser.fullName}</h2>
+            <p>{authUser.email}</p>
+            <p>{authUser.role}</p>
+            <p>Member Since {extractDate(authUser.createdAt)}</p>
+            <Badge bg={authUser.status === "active" ? "success" : "danger"}>
+              {authUser.status}
+            </Badge>
+            <Button
+              variant="danger"
+              onClick={(e) => {
+                e.preventDefault();
+                swal
+                  .fire({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#3085d6",
+                  })
+                  .then((result) => {
+                    if (result.isConfirmed) {
+                      handleDelete();
+                    }
+                  });
+              }}
+            >
+              Delete Account
+            </Button>
           </Container>
         </Col>
       </div>

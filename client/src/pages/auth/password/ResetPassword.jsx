@@ -6,26 +6,15 @@ import toast from "react-hot-toast";
 import SetPasswordForm from "../../../components/auth/SetPasswordForm";
 import { apiCall } from "../../apicall";
 
-const SetPassword = () => {
+const ResetPassword = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({});
   const navigate = useNavigate();
   const params = useParams();
 
-  const verifyToken = async () => {
+  const resetPasswordHandler = async (data) => {
     try {
-      const verified = await apiCall.getActivationTokenVerify(params.token);
-      setLoading(false);
-    } catch (except) {
-      console.log("exception", except);
-      toast.error(except.message);
-      navigate("/login");
-    }
-  };
-
-  const setPasswordHandler = async (data) => {
-    try {
-      let response = await apiCall.activateUser(params.token, data);
+      let response = await apiCall.resetPassword(params.resetToken, data);
 
       toast.success(response.message);
       navigate("/login");
@@ -39,6 +28,17 @@ const SetPassword = () => {
     }
   };
 
+  const verifyToken = async () => {
+    try {
+      const verified = await apiCall.getActivationTokenVerify(params.token);
+      setLoading(false);
+    } catch (except) {
+      console.log("exception", except);
+      toast.error(except.message);
+      navigate("/login");
+    }
+  };
+
   useEffect(() => {
     verifyToken();
   }, [params]);
@@ -46,7 +46,7 @@ const SetPassword = () => {
     <div className="login-container">
       <Col sm={12} md={{ offset: 0, span: 4 }}>
         <Container className="login-form">
-          <h2>Set New Password</h2>
+          <h2>Reset Password</h2>
           <hr />
           {loading ? (
             <>
@@ -56,7 +56,7 @@ const SetPassword = () => {
             </>
           ) : (
             <>
-              <SetPasswordForm handler={setPasswordHandler} error={error} />
+              <SetPasswordForm handler={resetPasswordHandler} error={error} />
             </>
           )}
         </Container>
@@ -65,4 +65,4 @@ const SetPassword = () => {
   );
 };
 
-export default SetPassword;
+export default ResetPassword;

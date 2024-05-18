@@ -47,7 +47,7 @@ class AuthController {
 
   verifyToken = async (req, res, next) => {
     try {
-      const token = req.params.token;
+      let token = req.params.token;
       let userDetail = await authSvc.getUserByFilter({ token: token });
       if (userDetail) {
         res.json({
@@ -56,11 +56,20 @@ class AuthController {
           meta: null,
         });
       } else {
-        next({
-          code: 400,
-          message: "Token does not exists",
-          result: { token },
-        });
+        userDetail = await authSvc.getUserByFilter({ resetToken: token });
+        if (userDetail) {
+          res.json({
+            result: userDetail,
+            message: "Token Verified",
+            meta: null,
+          });
+        } else {
+          next({
+            code: 400,
+            message: "Token does not exists",
+            result: { token },
+          });
+        }
       }
     } catch (error) {
       console.log("verifyToken: ", error);
@@ -306,7 +315,7 @@ class AuthController {
         let expiry = Date.now() + 86400000;
 
         let updateData = {
-          token: token,
+          resetToken: token,
           resetExpiry: expiry,
         };
 
@@ -347,7 +356,7 @@ class AuthController {
       let payload = req.body;
       let token = req.params.resetToken;
       let userDetail = await authSvc.getUserByFilter({
-        token: token,
+        resetToken: token,
       });
       if (!userDetail) {
         throw { code: 400, message: "Token not found" };
@@ -359,11 +368,11 @@ class AuthController {
           let updateData = {
             password: bcrypt.hashSync(payload.password, 10),
             resetExpiry: null,
-            token: null,
+            resetToken: null,
           };
           const updatedResponse = await authSvc.updateUser(
             {
-              token: token,
+              resetToken: token,
             },
             updateData
           );
