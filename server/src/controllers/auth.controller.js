@@ -306,7 +306,7 @@ class AuthController {
         let expiry = Date.now() + 86400000;
 
         let updateData = {
-          resetToken: token,
+          token: token,
           resetExpiry: expiry,
         };
 
@@ -347,7 +347,7 @@ class AuthController {
       let payload = req.body;
       let token = req.params.resetToken;
       let userDetail = await authSvc.getUserByFilter({
-        resetToken: token,
+        token: token,
       });
       if (!userDetail) {
         throw { code: 400, message: "Token not found" };
@@ -359,11 +359,11 @@ class AuthController {
           let updateData = {
             password: bcrypt.hashSync(payload.password, 10),
             resetExpiry: null,
-            resetToken: null,
+            token: null,
           };
           const updatedResponse = await authSvc.updateUser(
             {
-              resetToken: token,
+              token: token,
             },
             updateData
           );

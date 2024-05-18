@@ -1,0 +1,98 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: url("background-image.jpg") no-repeat center center fixed; /* Optional: for a background image */
+  background-size: cover;
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-card img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.profile-card h2 {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 10px;
+}
+
+.profile-card p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 5px 0;
+}
+
+.profile-card .btn-primary,
+.profile-card .btn-danger {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.profile-card .edit-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.profile-card .edit-icon:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.edit-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: url("background-image.jpg") no-repeat center center fixed; /* Optional: for a background image */
+  background-size: cover;
+}
+
+.edit-profile-form {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile-form h2 {
+  text-align: center;
+  color: rgba(39, 37, 37, 0.9);
+  margin-bottom: 20px;
+}
+
+.edit-profile-form .form-control {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.edit-profile-form .btn-primary {
+  width: 100%;
+  background-color: rgba(31, 32, 32, 0.8);
+  border: none;
+}
+
+.edit-profile-form .btn-primary:hover {
+  background-color: rgb(78, 80, 82);
+}

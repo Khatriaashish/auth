@@ -1,0 +1,53 @@
+.logout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: url("background-image.jpg") no-repeat center center fixed; /* Optional: for a background image */
+  background-size: cover;
+}
+
+.logout-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeOut 2s ease-in-out;
+}
+
+.logout-card h1 {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+}
+
+.logout-card p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 5px 0;
+}
+
+.logout-card .btn-primary {
+  width: 100%;
+  background-color: rgba(0, 123, 255, 0.8);
+  border: none;
+  margin-top: 20px;
+}
+
+.logout-card .btn-primary:hover {
+  background-color: rgba(0, 123, 255, 1);
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}

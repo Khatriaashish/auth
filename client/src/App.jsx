@@ -1,37 +1,45 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import { Toaster } from "react-hot-toast";
 import HomeHeading from "./components/common/HomeHeading.jsx";
 import Signup from "./pages/auth/signup/index.jsx";
 import Login from "./pages/auth/login/index.jsx";
+import ForgetPassword from "./pages/auth/password/ForgetPassword.jsx";
+import SetPassword from "./pages/auth/password/SetPassword.jsx";
+import UserProfile from "./pages/profile/index.jsx";
+import EditProfile from "./pages/profile/ProfileEdit.jsx";
+import PageNotFound from "./pages/common/PageNotFound.jsx";
+import Logout from "./pages/auth/logout/index.jsx";
 
 function App() {
   return (
     <>
       <HomeHeading />
+      <Toaster />
       <Routes>
         {/*Home Page*/}
         <Route path="/" element={<h1>Home</h1>} />
 
         {/* Registration */}
         <Route path="/signup" element={<Signup />} />
-        <Route path="/activate/:token" element={<h1>Activate Token</h1>} />
+        <Route path="/activate/:token" element={<SetPassword />} />
 
         {/* Reset Password */}
-        <Route path="/forget-password" element={<h1>Forget Password</h1>} />
-        <Route path="/reset/:token" element={<h1>Reset</h1>} />
+        <Route path="/forgot-password" element={<ForgetPassword />} />
+        <Route path="/reset/:token" element={<SetPassword />} />
 
         {/* login */}
         <Route path="/login" element={<Login />} />
 
         {/* Profile */}
-        <Route path="/profile" element={<h1>Profile</h1>} />
-        <Route path="/edit-profile" element={<h1>Edit profile</h1>} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
 
         {/*Logout*/}
-        <Route path="/logout" element={<h1>Logout</h1>} />
+        <Route path="/logout" element={<Logout />} />
 
         {/*Page not found */}
-        <Route path="*" element={<h1>Page not found</h1>} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );

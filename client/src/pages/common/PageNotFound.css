@@ -1,0 +1,42 @@
+.page-not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url("background-image.jpg") no-repeat center center fixed; /* Optional: for a background image */
+  background-size: cover;
+}
+
+.page-not-found-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.page-not-found-card h1 {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+  font-size: 48px;
+}
+
+.page-not-found-card p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 5px 0;
+}
+
+.page-not-found-card .btn-primary {
+  width: 100%;
+  background-color: rgba(0, 123, 255, 0.8);
+  border: none;
+  margin-top: 20px;
+}
+
+.page-not-found-card .btn-primary:hover {
+  background-color: rgba(0, 123, 255, 1);
+}
