@@ -322,7 +322,7 @@ class AuthController {
                 <p>Hello, ${userDetail.fullName}</p>
                 <p>You have requested to reset your password.</p>
                 <p>Please click the link below to reset.</p>
-                <a href="${process.env.FE_URL}/set-password/${token}">CLICK HERE</a>
+                <a href="${process.env.FE_URL}/reset/${token}">CLICK HERE</a>
                 <p>If you did not request this, please ignore this email.</p>
                 <p>Thank you</p>
             </div>`;
