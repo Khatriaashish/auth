@@ -18,6 +18,17 @@ app.use(cors());
 //bodyparser
 app.use(express.json());
 
+//static serving for localhost
+app.use("/asset", express.static("public/uploads"));
+
+//health-check
+app.get("/health", (req, res) => {
+  res.end("App is running well");
+});
+
+//api
+app.use("/api/auth", authRouter);
+
 app.use(express.static(path.join(__dirname, "../../../client/dist")));
 app.get("*", (req, res, next) => {
   const indexPath = path.join(
@@ -30,17 +41,6 @@ app.get("*", (req, res, next) => {
     }
   });
 });
-
-//static serving for localhost
-app.use("/asset", express.static("public/uploads"));
-
-//health-check
-app.get("/health", (req, res) => {
-  res.end("App is running well");
-});
-
-//api
-app.use("/api/auth", authRouter);
 
 //route not found handler
 app.use((req, res) => {
