@@ -2,11 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const { MulterError } = require("multer");
 const { ZodError } = require("zod");
+const path = require("path");
 
 //module routes
 const authRouter = require("../routes/auth.router");
 
 require("./db.config");
+require("./defaultadmin.config");
+
 const app = express();
 
 //cross origin resolve
@@ -14,6 +17,19 @@ app.use(cors());
 
 //bodyparser
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "../../../client/dist")));
+app.get("*", (req, res, next) => {
+  const indexPath = path.join(
+    path.join(__dirname, "../../../client/dist"),
+    "index.html"
+  );
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      next(err);
+    }
+  });
+});
 
 //static serving for localhost
 app.use("/asset", express.static("public/uploads"));
@@ -71,6 +87,10 @@ app.use((error, req, res, next) => {
     });
     result = msgBody;
     message = "Validation Fail";
+  }
+
+  if (typeof code !== "number" || code < 100 || code > 599) {
+    code = 500; // default to 500 if code is invalid
   }
 
   res.status(code).json({

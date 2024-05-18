@@ -7,6 +7,7 @@ const authSvc = require("../services/auth.service");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mailSvc = require("../services/mail.service");
+const UserModel = require("../model/user.model");
 require("dotenv").config();
 
 class AuthController {
@@ -239,7 +240,7 @@ class AuthController {
         meta: {
           page: page,
           limit: limit,
-          total: users.length,
+          total: await UserModel.countDocuments(),
         },
       });
     } catch (except) {

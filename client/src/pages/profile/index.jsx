@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge, Button, Container, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
+import { FaArrowLeft, FaEdit } from "react-icons/fa";
 import "./index.css";
 import image from "../../assets/images/background.jpg";
 import { useAuth } from "../../context/AuthContext";
@@ -27,6 +27,10 @@ const UserProfile = () => {
       <div className="profile-container">
         <Col sm={12} md={{ offset: 0, span: 4 }}>
           <Container className="profile-card">
+            <NavLink to={"/"} className={"btn btn-sm btn-ghost float-start"}>
+              <FaArrowLeft /> &nbsp; Dashboard
+            </NavLink>
+            <br />
             <NavLink to="/edit-profile">
               <FaEdit className="edit-icon" size={20} />
             </NavLink>

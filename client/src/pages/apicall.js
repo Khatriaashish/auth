@@ -104,6 +104,20 @@ class ApiCall extends HttpService {
       throw except;
     }
   };
+
+  getAllUsers = async ({ page = 1, limit = 5, search = "" }) => {
+    try {
+      let response = await this.getRequest(
+        "/auth/users?page=" + page + "&limit=" + limit + "&search=" + search,
+        {
+          auth: true,
+        }
+      );
+      return response;
+    } catch (except) {
+      throw except;
+    }
+  };
 }
 
 export const apiCall = new ApiCall();

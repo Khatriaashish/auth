@@ -12,6 +12,8 @@ import PageNotFound from "./pages/common/PageNotFound.jsx";
 import Logout from "./pages/auth/logout/index.jsx";
 import ResetPassword from "./pages/auth/password/ResetPassword.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
+import Home from "./pages/home/Home.jsx";
+import UserList from "./pages/home/UserList.jsx";
 
 function App() {
   const ProtectedRoute = ({ children, role }) => {
@@ -40,7 +42,17 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <h1>Home</h1>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* role based authorization - admin */}
+        <Route
+          path="/list-user"
+          element={
+            <ProtectedRoute role="admin">
+              <UserList />
             </ProtectedRoute>
           }
         />
@@ -91,16 +103,6 @@ function App() {
           element={
             <ProtectedRoute>
               <EditProfile />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* role based authorization - admin */}
-        <Route
-          path="/list-user"
-          element={
-            <ProtectedRoute role="admin">
-              <h1>User List</h1>
             </ProtectedRoute>
           }
         />

@@ -9,6 +9,7 @@ import ImageUploader from "../../components/common/ImageUploader";
 import { toast } from "react-hot-toast";
 import { apiCall } from "../apicall";
 import { NavLink, useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const EditProfile = () => {
   const { authUser } = useAuth();
@@ -66,7 +67,7 @@ const EditProfile = () => {
       <Col sm={12} md={{ offset: 0, span: 4 }}>
         <Container className="edit-profile-form">
           <NavLink to={"/profile"} className={"btn btn-sm btn-ghost"}>
-            Back
+            <FaArrowLeft /> &nbsp; Go to Profile
           </NavLink>
           <h2>Edit Profile</h2>
           <Form onSubmit={handleSubmit(handler)}>

@@ -1,0 +1,41 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.dashboard {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard h2 {
+  text-align: center;
+  color: rgba(53, 49, 49, 0.9);
+  margin-bottom: 20px;
+}
+
+.glass-effect-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.glass-effect-content h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.glass-effect-content .btn {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
