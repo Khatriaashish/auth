@@ -62,8 +62,8 @@ Functionality is divided into following three dimension:
 
 ## Application Structure
 Root Directory contains package.json and two folder:
-+client - for react code
-+server - for express code
++ client - for react code
++ server - for express code
 
 `server` directory contains index.js file, where server is created with http module where express app is loaded.
 express app is created in `server/src/config/express.config.js`. DB configuration, api routes, and error handling is loaded in express.config.js.
