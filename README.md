@@ -42,6 +42,7 @@ Functionality is divided into following three dimension:
 > `DEF_ADMIN_EMAIL` and `DEF_ADMIN_PASS` is used to set email and password of admin if there is no admin users in database.
 > [!NOTE]
 > Cloudinary was used to store user images. Sign up in cloudinary to get your own API KEY and other credentials
++ inside `client` directory, there is another `.env.example`. Rename it to `.env` and set your localhost url ending with `/api` e.g. [http://localhost:PORT_IN_ENV/api]
 + in terminal, run `npm run build`
 + After that, run `npm start`
 + Browse app at [http://localhost:PORT_YOU_SET_IN_ENV]
