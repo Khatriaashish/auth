@@ -1,7 +1,7 @@
 const authCtrl = require("../controllers/auth.controller");
 const CheckLogin = require("../middlewares/auth.middleware");
 const CheckPermission = require("../middlewares/rbac.middleware");
-const uploader = require("../middlewares/uploader.middleware");
+const { uploader } = require("../middlewares/uploader.middleware");
 const validateRequest = require("../middlewares/validate-request.middleware");
 const {
   signUpSchema,

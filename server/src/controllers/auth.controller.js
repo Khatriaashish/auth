@@ -9,13 +9,14 @@ const jwt = require("jsonwebtoken");
 const mailSvc = require("../services/mail.service");
 const UserModel = require("../model/user.model");
 require("dotenv").config();
+const { cloudinary } = require("../middlewares/uploader.middleware");
 
 class AuthController {
   signup = async (req, res, next) => {
     try {
       const payload = req.body;
       payload.token = generateRandomString();
-      payload.image = req.file.filename;
+      payload.image = req.file.path;
 
       const response = await authSvc.storeSignUpPayload(payload);
 
@@ -260,8 +261,14 @@ class AuthController {
         };
 
         if (req.file) {
-          updateBody.image = req.file.filename;
-          deleteFile("./public/uploads/users/", userDetail.image);
+          updateBody.image = req.file.path;
+          const publicId = userDetail.image
+            ? userDetail.image.split("/").pop().split(".")[0]
+            : null;
+
+          if (publicId) {
+            await CloudinaryStorage.uploader.destroy(publicId);
+          }
         }
         const update = await authSvc.updateUser(
           { _id: req.authUser._id },
@@ -290,8 +297,15 @@ class AuthController {
       if (userDetail) {
         const deleted = await authSvc.deleteUser(req.authUser._id);
 
-        deleteFile("./public/uploads/users/", userDetail.image);
+        // Extract the public ID from the existing image URL
+        const publicId = userDetail.image
+          ? userDetail.image.split("/").pop().split(".")[0]
+          : null;
 
+        // Delete the old image from Cloudinary if it exists
+        if (publicId) {
+          await cloudinary.uploader.destroy(publicId);
+        }
         res.json({
           result: deleted,
           message: "User deleted successfully",

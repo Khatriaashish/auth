@@ -34,10 +34,7 @@ const UserProfile = () => {
             <NavLink to="/edit-profile">
               <FaEdit className="edit-icon" size={20} />
             </NavLink>
-            <img
-              src={import.meta.env.VITE_IMAGE_URL + "/users/" + authUser.image}
-              alt="Profile"
-            />
+            <img src={authUser.image} alt="Profile" />
             <h2>{authUser.fullName}</h2>
             <p>{authUser.email}</p>
             <p>{authUser.role}</p>

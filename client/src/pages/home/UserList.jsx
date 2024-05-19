@@ -76,11 +76,7 @@ const UserList = () => {
                             }}
                             style={{ maxWidth: "50px" }}
                             fluid
-                            src={
-                              import.meta.env.VITE_IMAGE_URL +
-                              "/users/" +
-                              item.image
-                            }
+                            src={item.image}
                             alt=""
                           />
                         </td>
