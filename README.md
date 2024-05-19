@@ -38,9 +38,9 @@ Functionality is divided into following three dimension:
 + Clone this repository
 + In root, there is `.env.example` file. Rename `.env.example` file to `.env`
 + Edit `.env` with your own credentials.
-+ > [!NOTE]
+> [!NOTE]
 > `DEF_ADMIN_EMAIL` and `DEF_ADMIN_PASS` is used to set email and password of admin if there is no admin users in database.
-+ > [!NOTE]
+> [!NOTE]
 > Cloudinary was used to store user images. Sign up in cloudinary to get your own API KEY and other credentials
 + in terminal, run `npm run build`
 + After that, run `npm start`
