@@ -21,25 +21,13 @@ class MailService {
     }
   }
 
-  emailSend = async (
-    to,
-    subject,
-    msg,
-    attachments = { filename: null, path: null, cid: null }
-  ) => {
+  emailSend = async (to, subject, msg) => {
     try {
       this.transport.sendMail({
         to: to,
         from: process.env.SMTP_FROM,
         subject: subject,
         html: msg,
-        attachments: [
-          {
-            filename: attachments.filename,
-            path: attachments.path,
-            cid: attachments.cid,
-          },
-        ],
       });
     } catch (except) {
       console.log("emailSend: ", except);
