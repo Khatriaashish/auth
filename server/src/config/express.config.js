@@ -18,8 +18,6 @@ app.use(cors());
 //bodyparser
 app.use(express.json());
 
-//static serving for localhost
-app.use("/asset", express.static(path.join(__dirname, "public/uploads")));
 //health-check
 app.get("/health", (req, res) => {
   res.end("App is running well");
@@ -28,6 +26,7 @@ app.get("/health", (req, res) => {
 //api
 app.use("/api/auth", authRouter);
 
+app.use("/asset", express.static(path.join(__dirname, "public/uploads")));
 app.use(express.static(path.join(__dirname, "../../../client/dist")));
 app.get("*", (req, res, next) => {
   const indexPath = path.join(
