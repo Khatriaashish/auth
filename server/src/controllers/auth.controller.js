@@ -170,7 +170,7 @@ class AuthController {
             next({ code: 400, message: "Credential doesn't match" });
           }
         } else {
-          next({ code: 401, messsage: "User not activated" });
+          next({ code: 401, message: "User not activated" });
         }
       } else {
         next({ code: 400, message: "User doesn't exist" });

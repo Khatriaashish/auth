@@ -54,6 +54,7 @@ app.use((error, req, res, next) => {
   let result = error.result ?? null;
   let code = error.code ?? 500;
   let message = error.message ?? "Server error";
+  console.log(error);
 
   //multer file size error handle
   if (error instanceof MulterError) {
@@ -85,10 +86,6 @@ app.use((error, req, res, next) => {
     });
     result = msgBody;
     message = "Validation Fail";
-  }
-
-  if (typeof code !== "number" || code < 100 || code > 599) {
-    code = 500; // default to 500 if code is invalid
   }
 
   res.status(code).json({

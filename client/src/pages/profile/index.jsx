@@ -28,9 +28,8 @@ const UserProfile = () => {
         <Col sm={12} md={{ offset: 0, span: 4 }}>
           <Container className="profile-card">
             <NavLink to={"/"} className={"btn btn-sm btn-ghost float-start"}>
-              <FaArrowLeft /> &nbsp; Dashboard
+              <FaArrowLeft />
             </NavLink>
-            <br />
             <NavLink to="/edit-profile">
               <FaEdit className="edit-icon" size={20} />
             </NavLink>

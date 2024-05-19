@@ -110,13 +110,7 @@ const EditProfile = () => {
               {authUser && authUser.image && (
                 <div className="mt-3">
                   <img
-                    src={
-                      thumb
-                        ? URL.createObjectURL(thumb)
-                        : import.meta.env.VITE_IMAGE_URL +
-                          "/users/" +
-                          authUser.image
-                    }
+                    src={thumb ? URL.createObjectURL(thumb) : authUser.image}
                     alt="Profile"
                     style={{
                       width: "100px",
