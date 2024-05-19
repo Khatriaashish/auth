@@ -83,37 +83,5 @@ Routing has been done in `App.jsx` at src.
 + `repository` contains axios configuration.
 + `utils` contains small function like mapping mongodb time to user readable time.
 
-## Folder Architecture
-├───client
-│   └───src
-│       ├───assets
-│       │   └───images
-│       ├───components
-│       │   ├───auth
-│       │   └───common
-│       │       ├───HomeHeading.jsx
-│       │       ├───ImageUploader
-│       │       └───Pagination
-│       ├───context
-│       ├───pages
-│       │   ├───auth
-│       │   │   ├───login
-│       │   │   ├───logout
-│       │   │   ├───password
-│       │   │   └───signup
-│       │   ├───common
-│       │   ├───home
-│       │   └───profile
-│       ├───repository
-│       └───utils
-└───server
-    └───src
-        ├───config
-        ├───controllers
-        ├───middlewares
-        ├───model
-        ├───routes
-        ├───services
-        └───validators
 
 
