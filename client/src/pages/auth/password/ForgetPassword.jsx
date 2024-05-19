@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 
 const ForgetPassword = () => {
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState(null);
   const navigate = useNavigate();
   const yupSchema = Yup.object({
     email: Yup.string().email().required(),
@@ -29,6 +30,7 @@ const ForgetPassword = () => {
     try {
       setLoading(true);
       const response = await apiCall.forgetPassword(data);
+      setMessage(response.message);
       toast.success(response.message);
       navigate("/login");
     } catch (error) {
@@ -47,7 +49,12 @@ const ForgetPassword = () => {
         <Container className="login-form">
           <h2>Forgot your password?</h2>
           <hr />
-          <center className="small">Enter your email to continue</center>
+          {message ? (
+            <center className="small text-warning">{response.message}</center>
+          ) : (
+            <center className="small">Enter your email to continue</center>
+          )}
+
           <Form onSubmit={handleSubmit(handler)}>
             <Form.Group controlId="formEmail" className="mt-3">
               <Form.Label>Email</Form.Label>
