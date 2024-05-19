@@ -17,7 +17,7 @@ Functionality is divided into following three dimension:
 
 ### Role based
 + Admin User can view the list of user
-+ Pagination for list
++ Pagination for list (5 user per page)
 
 ## Other features
 + Exception Handling
