@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Col } from "react-bootstrap";
 import "./index.css";
 import { useAuth } from "../../context/AuthContext";
@@ -62,6 +62,12 @@ const EditProfile = () => {
     }
   };
 
+  useEffect(() => {
+    if (authUser) {
+      setValue("fullName", authUser.fullName);
+      setValue("email", authUser.email);
+    }
+  }, [authUser, setValue]);
   return (
     <div className="edit-profile-container">
       <Col sm={12} md={{ offset: 0, span: 4 }}>
@@ -75,7 +81,7 @@ const EditProfile = () => {
               <Form.Label>Full Name</Form.Label>
               <Form.Control
                 type="text"
-                value={authUser.fullName}
+                defaultValue={authUser.fullName}
                 {...register("fullName", { required: true })}
                 placeholder="Enter your full name"
                 isInvalid={!!errors.fullName}
@@ -90,7 +96,7 @@ const EditProfile = () => {
               <Form.Control
                 type="email"
                 {...register("email", { required: true })}
-                value={authUser.email}
+                defaultValue={authUser.email}
                 placeholder="Enter your email"
                 isInvalid={!!errors.email}
                 disabled={loading}

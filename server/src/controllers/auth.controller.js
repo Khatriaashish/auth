@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const mailSvc = require("../services/mail.service");
 const UserModel = require("../model/user.model");
 require("dotenv").config();
-const { cloudinary } = require("../middlewares/uploader.middleware");
+const cloudinary = require("cloudinary").v2;
 
 class AuthController {
   signup = async (req, res, next) => {
@@ -267,7 +267,7 @@ class AuthController {
             : null;
 
           if (publicId) {
-            await CloudinaryStorage.uploader.destroy(publicId);
+            await cloudinary.uploader.destroy(publicId);
           }
         }
         const update = await authSvc.updateUser(
